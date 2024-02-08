@@ -3,6 +3,7 @@ from aiogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup, I
 from utils.database import Database
 import os
 import asyncio
+from keyboards.keyboards import start_keyboards
 
 async def keyboard_btn(girl_name, girl_link):
     inline_keyboard = [
@@ -35,6 +36,7 @@ async def info_girl(message: Message, bot: Bot):
             # Отправляем информацию о девушке
             await bot.send_message(message.from_user.id, girl_information, reply_markup=keyboard)
             await asyncio.sleep(2)
+        await bot.send_message(message.from_user.id, f"Did you find the girl you like? ☝️", reply_markup=start_keyboards)
     except Exception as error:
         with open('errors.txt', 'a') as error_file:
             error_message = f"Ошибка при попытке показать анкеты - {error}\n"
